@@ -1,20 +1,20 @@
-import yfinance as yf
+
 import streamlit as st
+import sklearn
+import joblib
 import pandas as pd
 
-st.write("""
-# Welcome to My first Stock price APP - Sabrine :D
-Shown are the stock closing price and volume of Google!
-""")
+user_input = st.text_input("Enter text :", "")
+model = joblib.load("model.pkl")
 
-# https://towardsdatascience.com/how-to-get-stock-data-using-python-c0de1df17e75
-#define the ticker symbol
-tickerSymbol = 'GOOGL'
-#get data on this ticker
-tickerData = yf.Ticker(tickerSymbol)
-#get the historical prices for this ticker
-tickerDf = tickerData.history(period='1d', start='2010-5-31', end='2020-5-31')
-# Open	High	Low	Close	Volume	Dividends	Stock Splits
+if (user_input) :
+    Y_pred = model.predict_proba([user_input])[0]
+    #dicProba = {"hate_speech": Y_pred[0], "offensive_language": Y_pred[1],"neither": Y_pred[2]}
 
-st.line_chart(tickerDf.Close)
-st.line_chart(tickerDf.Volume)
+    if Y_pred[0] > Y_pred[1] and Y_pred[0]> Y_pred[2]:
+        st.text("hate_speech")
+    elif Y_pred[1] > Y_pred[0] and Y_pred[1]> Y_pred[2] :
+        st.text("offensive_language")
+    else :
+        st.text("neither")
+
