@@ -1,0 +1,9 @@
+## Fichier d'environement : 
+en utilise ce fichier afin de définir les varibale d'environnement"key" sur
+une valeur. cette valeur sera dans l'environnement de 
+toutes les commandes Dockerfile "descendantes" 
+et peut également étre remplacée en ligne.
+
+##Volume docker :
+les volumes sert à sauvegarder les données et également partager des
+données entre conteneurs. les volumes sont des répertoires(ou des fichiers) qui ne font pas partie du systéme de fichiers Union mais qui existent sur le systéme de fichiers hôte
